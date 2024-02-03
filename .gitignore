@@ -1,0 +1,15 @@
+# Ignore Terraform directories and files
+**/.terraform/*
+**/.tfstate
+**/.tfstate.*
+**/.tfvars
+
+# Ignore local .terraform directories
+
+# Ignore macOS and IDE-specific files
+**/.DS_Store
+**/.vscode/
+**/.idea/
+
+# Ignore Terraform lock file
+**/.terraform.lock.hcl
