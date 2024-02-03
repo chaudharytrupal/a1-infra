@@ -2,11 +2,10 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.16"
+      version = "~> 5.0"
     }
   }
-
-  required_version = ">= 1.2.0"
+  required_version = ">= 1.5.0"
 }
 
 provider "aws" {
@@ -59,6 +58,19 @@ resource "aws_instance" "my_ec2_server" {
 
 output "ec2_ip" {
   value = aws_instance.my_ec2_server.public_ip
+}
+
+variable "repo_names" {
+  default = ["my_db", "my_app"]
+}
+
+resource "aws_ecr_repository" "ecr_repos" {
+  count                = length(var.repo_names)
+  name                 = var.repo_names[count.index]
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }
 
 
